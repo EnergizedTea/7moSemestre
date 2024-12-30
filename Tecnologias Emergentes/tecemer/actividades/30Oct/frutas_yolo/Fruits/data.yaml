@@ -1,0 +1,13 @@
+train: train/images
+val: valid/images
+test: test/images
+
+nc: 3
+names: ["apple", "banana", "orange"]
+
+roboflow:
+  workspace: tecnologasemergentesheirofthestarrynight
+  project: fruits-emqmo
+  version: 1
+  license: Private
+  url: https://app.roboflow.com/tecnologasemergentesheirofthestarrynight/fruits-emqmo/1

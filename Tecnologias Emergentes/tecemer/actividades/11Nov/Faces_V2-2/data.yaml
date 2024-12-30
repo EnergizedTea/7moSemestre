@@ -1,0 +1,18 @@
+names:
+  - Alfredo
+  - DiegoPacheco
+  - Inigo
+  - JPHAJP
+  - Leon
+  - Mauro
+  - Naomi
+nc: 7
+roboflow:
+  license: CC BY 4.0
+  project: faces_v2
+  url: https://universe.roboflow.com/proyects/faces_v2/dataset/2
+  version: 2
+  workspace: proyects
+train: /Users/energizedtea/Desktop/Universidad/7mo Semestre/Tecnologias Emergentes/tecemer/actividades/11Nov/Faces_V2-2/train/images
+val: /Users/energizedtea/Desktop/Universidad/7mo Semestre/Tecnologias Emergentes/tecemer/actividades/11Nov/Faces_V2-2/valid/images
+test: /Users/energizedtea/Desktop/Universidad/7mo Semestre/Tecnologias Emergentes/tecemer/actividades/11Nov/Faces_V2-2/test/images

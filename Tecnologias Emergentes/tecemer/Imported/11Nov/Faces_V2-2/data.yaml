@@ -1,0 +1,18 @@
+names:
+  - Alfredo
+  - DiegoPacheco
+  - Inigo
+  - JPHAJP
+  - Leon
+  - Mauro
+  - Naomi
+nc: 7
+roboflow:
+  license: CC BY 4.0
+  project: faces_v2
+  url: https://universe.roboflow.com/proyects/faces_v2/dataset/2
+  version: 2
+  workspace: proyects
+train: train/images
+val: valid/images
+test: test/images
