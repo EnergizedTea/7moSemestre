@@ -1,0 +1,85 @@
+import tensorflow as tf
+import matplotlib.pyplot as plt
+import numpy as np
+from sklearn.model_selection import train_test_split
+
+mnist = tf.keras.datasets.cifar10
+
+(x_train, y_train),(x_test, y_test) = mnist.load_data()
+
+class_name = ("airplane",										
+            "automobile",										
+            "bird",										
+            "cat",										
+            "deer",										
+            "dog",										
+            "frog",										
+            "horse",										
+            "ship",										
+            "truck")
+
+plt.imshow(x_train[0])
+plt.show()
+
+x_train, x_test = x_train/255, x_test/255
+
+x_train, x_val, y_train, y_val = train_test_split(x_train,
+                                                  y_train,
+                                                  test_size=0.2,
+                                                  random_state=42)
+
+print(f'{"#"*20} FINALES {"#"*20}')
+print(f'Datos de Entrenamientos:    {x_train.shape}')
+print(f'Datos de Validacion:    {x_val.shape}')
+print(f'Datos de Prueba:    {x_test.shape}')
+model = tf.keras.models.Sequential([
+    # CNN
+    # Capa de Entrada
+    tf.keras.layers.Conv2D(32,(3,3), activation='relu', input_shape=(32, 32, 3)),
+    tf.keras.layers.MaxPooling2D((2,2)),
+    tf.keras.layers.Conv2D(16, (3,3), activation='relu'),
+    tf.keras.layers.MaxPooling2D((2,2)),
+
+    # Fully Connected Layer
+    #tf.keras.layers.Flatten(input_shape=(32,32,3), name="Input_Layer"),
+    tf.keras.layers.Flatten(),
+    tf.keras.layers.Dense(128, activation='relu'),
+    tf.keras.layers.Dropout(0.2),
+    tf.keras.layers.Dense(64, activation='relu'),
+    tf.keras.layers.Dropout(0.2),
+    tf.keras.layers.Dense(10, activation='softmax')
+])
+
+print(model.summary())
+
+model.compile(optimizer='adam',
+              loss='sparse_categorical_crossentropy',
+              metrics=['accuracy'])
+
+model_history = model.fit(x_train,
+                          y_train,
+                          epochs=50,
+                          batch_size=64,
+                          validation_data=(x_val, y_val))
+
+test_loss, test_acc = model.evaluate(x_test, y_test)
+print(f'Loss: {test_loss}')
+print(f'Acc: {test_acc}')
+
+#model.save(figsize=(15,4))
+
+plt.subplot(1,2,1)
+plt.plot(model_history.history['accuracy'])
+plt.plot(model_history.history['val_accuracy'])
+plt.title('Model Accuracy')
+plt.ylabel('Accuracy')
+plt.xlabel('Epoch')
+plt.legend(['Train', 'Val'], loc='upper left')
+
+plt.subplot(1,2,2)
+plt.plot(model_history.history['loss'])
+plt.plot(model_history.history['val_loss'])
+plt.title('Model loss')
+plt.ylabel('Loss')
+plt.xlabel('Epoch')
+plt.show()
